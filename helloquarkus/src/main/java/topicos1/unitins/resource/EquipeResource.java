@@ -45,7 +45,7 @@ public class EquipeResource {
     }
 
     @PUT //altera todo o objeto
-    @Path("/{id}") // consulta ao ID; Entre chaves: significa que é um parametro
+    @Path("alter/{id}") // consulta ao ID; Entre chaves: significa que é um parametro
     @Consumes(MediaType.APPLICATION_JSON) //forma que o dado está vindo para ser consumido
     @Produces(MediaType.APPLICATION_JSON) // produz; retorna o metodo
     @Transactional // insert, delete e update
