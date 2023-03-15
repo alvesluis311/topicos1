@@ -9,6 +9,10 @@ public class AtletaResponseDTO {
     private Long id;
     private String nome;
     private Map<String, Object> equipe;
+    private int idade;
+    private String cpf;
+    private Double altura;
+    private String esporte;
 
     public AtletaResponseDTO(Atleta atleta) {
         this.id = atleta.getId();
@@ -16,6 +20,10 @@ public class AtletaResponseDTO {
         this.equipe = new HashMap<String, Object>();
         this.equipe.put("nome", atleta.getEquipe().getNome());
         this.equipe.put("pais", atleta.getEquipe().getPais());
+        this.idade = atleta.getIdade();
+        this.cpf = atleta.getCpf();
+        this.altura = atleta.getAltura();
+        this.esporte = atleta.getEsporte();
     }
 
     public Long getId() {
@@ -42,5 +50,36 @@ public class AtletaResponseDTO {
         this.equipe = equipe;
     }
 
-    
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public Double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(Double altura) {
+        this.altura = altura;
+    }
+
+    public String getEsporte() {
+        return esporte;
+    }
+
+    public void setEsporte(String esporte) {
+        this.esporte = esporte;
+    }
+
 }

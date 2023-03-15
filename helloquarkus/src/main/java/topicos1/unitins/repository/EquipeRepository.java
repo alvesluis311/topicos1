@@ -9,7 +9,7 @@ import topicos1.unitins.model.Equipe;
 @ApplicationScoped
 public class EquipeRepository implements PanacheRepository<Equipe>{
 
-    public List<Equipe> findByNomeIgnoreCase(String nome) {
+    public List<Equipe> findByNome(String nome) {
         if (nome == null){
             return null;
         }

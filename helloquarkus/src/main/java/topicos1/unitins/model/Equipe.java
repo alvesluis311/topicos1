@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Equipe {
@@ -13,9 +15,13 @@ public class Equipe {
     private Long id;
 
     @Column(nullable = false, length = 60)
+    @NotBlank(message = "O campo nome deve ser informado")
+    @Size(min = 3, max = 60, message = "O tamanho máximo para o campo de nome é de 60 caracteres e o mínimo é de 3")
     private String nome;
 
     @Column(nullable = false, length = 60)
+    @NotBlank(message = "O campo país deve ser informado")
+    @Size(min = 2, max = 60, message = "O tamanho máximo para o campo de nome é de 60 caracteres e o mínimo é de 2")
     private String pais;
 
     public Long getId() {

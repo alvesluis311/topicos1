@@ -7,6 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 
 @Entity
 public class Atleta {
@@ -15,6 +19,9 @@ public class Atleta {
     private Long id;
 
     @Column(nullable = false, length = 80)
+    @NotBlank(message = "O campo nome deve ser informado")
+    @Min(value = 3, message = "O tamanho mínimo para o campo de nome é de 3 caracteres")
+    @Max(value = 80, message = "O tamanho máximo para o campo de nome é de 80 caracteres")
     private String nome;
 
     @ManyToOne

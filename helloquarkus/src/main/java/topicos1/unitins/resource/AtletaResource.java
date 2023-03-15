@@ -1,12 +1,13 @@
 package topicos1.unitins.resource;
 
 import java.util.List;
-import java.util.stream.Collectors;
+// import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
+//import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -14,12 +15,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import topicos1.unitins.dto.AtletaDTO;
 import topicos1.unitins.dto.AtletaResponseDTO;
-import topicos1.unitins.model.Atleta;
-import topicos1.unitins.repository.AtletaRepository;
-import topicos1.unitins.repository.EquipeRepository;
+//import topicos1.unitins.model.Atleta;
+//import topicos1.unitins.repository.AtletaRepository;
+//import topicos1.unitins.repository.EquipeRepository;
+import topicos1.unitins.service.AtletaService;
 
 @Path("/atletas") // no plural
 @Consumes(MediaType.APPLICATION_JSON)
@@ -27,17 +31,16 @@ import topicos1.unitins.repository.EquipeRepository;
 public class AtletaResource {
 
     @Inject
-    private AtletaRepository repository;
-
-    @Inject
-    private EquipeRepository equipeRepository;
+    private AtletaService atletaService;
 
     @GET
     public List<AtletaResponseDTO> getAll() {
 
-        return repository.findAll()
-        .stream().map(atleta -> new AtletaResponseDTO(atleta))
-        .collect(Collectors.toList()); 
+        return atletaService.getAll();
+
+        // return repository.findAll()
+        // .stream().map(atleta -> new AtletaResponseDTO(atleta))
+        // .collect(Collectors.toList()); 
         // seleciona todos os Atletas do banco de dados
 
     }
@@ -46,15 +49,21 @@ public class AtletaResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public AtletaResponseDTO insert (AtletaDTO dto) {
+    public Response insert (@Valid AtletaDTO dto) {
 
-        Atleta entity = new Atleta();
-        entity.setNome(dto.getNome());
-        entity.setEquipe(equipeRepository.findById(dto.getIdequipe()));
-        // adiciona um atleta no banco de dados
-        repository.persist(entity);
+        AtletaResponseDTO responseDTO = atletaService.insert(dto);
 
-        return new AtletaResponseDTO(entity);
+        return Response
+        .status(Status.CREATED)
+        .entity(responseDTO)
+        .build();
+        // Atleta entity = new Atleta();
+        // entity.setNome(dto.getNome());
+        // entity.setEquipe(equipeRepository.findById(dto.getIdEquipe()));
+        // // adiciona um atleta no banco de dados
+        // repository.persist(entity);
+
+        // return new AtletaResponseDTO(entity);
     }
 
     @PUT //altera todo o objeto
@@ -62,46 +71,46 @@ public class AtletaResource {
     @Consumes(MediaType.APPLICATION_JSON) //forma que o dado está vindo para ser consumido
     @Produces(MediaType.APPLICATION_JSON) // produz; retorna o metodo
     @Transactional // insert, delete e update
-    public Atleta update(@PathParam("id") Long id, Atleta atleta) {
+    public Response update(@Valid @PathParam("id") Long id, AtletaDTO dto) {
 
-        Atleta entity = repository.findById(id); // entity é a informação que está no BD
+        atletaService.update(id, dto);
+        // Atleta entity = repository.findById(id); // entity é a informação que está no BD
 
-        entity.setNome(atleta.getNome());
-        entity.setIdade(atleta.getIdade());
-        entity.setAltura(atleta.getAltura());
-        entity.setCpf(atleta.getCpf());
-        entity.setEsporte(atleta.getEsporte());
-        // não precisa de persist();
+        // entity.setNome(atleta.getNome());
+        // entity.setIdade(atleta.getIdade());
+        // entity.setAltura(atleta.getAltura());
+        // entity.setCpf(atleta.getCpf());
+        // entity.setEsporte(atleta.getEsporte());
         
-        return entity;
+        return Response.status(Status.NO_CONTENT).build();
     }
 
-    @DELETE
-    @Path("delete/{id}")
-    @Transactional
-    public void delete(@PathParam("id") Long id){
-        Atleta atleta = repository.findById(id);
-        if(repository.isPersistent(atleta))
-        repository.delete(atleta);
+    @PUT
+    @Path("/{id}")
+    public Response delete(@Valid @PathParam("id") Long id) {
+        atletaService.delete(id);
+        return Response.status(Status.NO_CONTENT).build();
     }
 
     @GET
     @Path("/{id}")
-    public Atleta getById(@PathParam("id") Long id) {
-    return repository.findById(id);
+    public AtletaResponseDTO findById(@PathParam("id") Long id) {
+        return atletaService.findById(id);
+    // return repository.findById(id);
     }
 
 
     @GET
     @Path("/count")
     public long count(){
-        return repository.count();
+        return atletaService.count();
     }
 
     @GET
     @Path("/nome/{nome}")
-    public List<Atleta> searchByName(@PathParam("nome") String nome) {
-    return repository.findByNomeIgnoreCase(nome);
+    public List<AtletaResponseDTO> searchByName(@PathParam("nome") String nome) {
+    return atletaService.findByNome(nome);
+    //    return repository.findByNome(nome);
     }
 
 }

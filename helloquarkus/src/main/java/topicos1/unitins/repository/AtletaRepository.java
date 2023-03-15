@@ -9,7 +9,7 @@ import topicos1.unitins.model.Atleta;
 @ApplicationScoped
 public class AtletaRepository implements PanacheRepository<Atleta>{
 
-    public List<Atleta> findByNomeIgnoreCase(String nome) {
+    public List<Atleta> findByNome(String nome) {
         return find("LOWER(nome) LIKE LOWER(concat('%', ?1, '%'))", nome).list();
     }
     

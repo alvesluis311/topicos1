@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -37,7 +38,7 @@ public class EquipeResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Equipe insert (Equipe equipe) {
+    public Equipe insert (@Valid Equipe equipe) {
 
         repository.persist(equipe);
 
@@ -49,7 +50,7 @@ public class EquipeResource {
     @Consumes(MediaType.APPLICATION_JSON) //forma que o dado está vindo para ser consumido
     @Produces(MediaType.APPLICATION_JSON) // produz; retorna o metodo
     @Transactional // insert, delete e update
-    public Equipe update(@PathParam("id") Long id, Equipe equipe) {
+    public Equipe update(@Valid @PathParam("id") Long id, Equipe equipe) {
 
         // entity é a informação que está no BD
         Equipe entity = repository.findById(id); 
@@ -85,7 +86,7 @@ public class EquipeResource {
     @GET
     @Path("/nome/{nome}")
     public List<Equipe> searchByName(@PathParam("nome") String nome) {
-    return repository.findByNomeIgnoreCase(nome);
+    return repository.findByNome(nome);
     }
 
 }
