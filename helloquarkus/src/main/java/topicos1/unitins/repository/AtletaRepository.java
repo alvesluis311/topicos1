@@ -10,7 +10,9 @@ import topicos1.unitins.model.Atleta;
 public class AtletaRepository implements PanacheRepository<Atleta>{
 
     public List<Atleta> findByNome(String nome) {
-        return find("LOWER(nome) LIKE LOWER(concat('%', ?1, '%'))", nome).list();
+        if (nome == null)
+            return null;
+        return find("UPPER(nome) LIKE ?1 ", "%"+nome.toUpperCase()+"%").list();
     }
     
     

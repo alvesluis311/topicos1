@@ -46,6 +46,10 @@ public class AtletaImplService implements AtletaService {
         Atleta entity = new Atleta();
         entity.setNome(dto.getNome());
         entity.setEquipe(equipeRepository.findById(dto.getIdEquipe()));
+        entity.setIdade(dto.getIdade());
+        entity.setCpf(dto.getCpf());
+        entity.setAltura(dto.getAltura());
+        entity.setEsporte(dto.getEsporte());
 
         atletaRepository.persist(entity);
         return new AtletaResponseDTO(entity);
@@ -58,9 +62,10 @@ public class AtletaImplService implements AtletaService {
 
        entity.setNome(dto.getNome());
        entity.setEquipe(equipeRepository.findById(dto.getIdEquipe()));
-       entity.setNome(dto.getNome());
-       entity.setNome(dto.getNome());
-       entity.setNome(dto.getNome());
+       entity.setIdade(dto.getIdade());
+       entity.setCpf(dto.getCpf());
+       entity.setAltura(dto.getAltura());
+       entity.setEsporte(dto.getEsporte());
 
        return new AtletaResponseDTO(entity);
     }
@@ -69,7 +74,8 @@ public class AtletaImplService implements AtletaService {
     public void delete(Long id) {
         Atleta entity = atletaRepository.findById(id);
 
-        atletaRepository.delete(entity);
+        if (atletaRepository.isPersistent(entity))
+            atletaRepository.delete(entity);
     }
 
     @Override

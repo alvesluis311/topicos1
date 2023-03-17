@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
-//import javax.ws.rs.DELETE;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -85,11 +85,11 @@ public class AtletaResource {
         return Response.status(Status.NO_CONTENT).build();
     }
 
-    @PUT
+    @DELETE
     @Path("/{id}")
-    public Response delete(@Valid @PathParam("id") Long id) {
+    @Transactional
+    public void delete(@PathParam("id") Long id) {
         atletaService.delete(id);
-        return Response.status(Status.NO_CONTENT).build();
     }
 
     @GET

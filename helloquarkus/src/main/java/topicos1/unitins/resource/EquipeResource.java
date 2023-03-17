@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -60,15 +59,6 @@ public class EquipeResource {
         // não precisa de persist();
         
         return entity;
-    }
-
-    @DELETE
-    @Path("delete/{id}")
-    @Transactional
-    public void delete(@PathParam("id") Long id){
-        Equipe equipe = repository.findById(id);
-        if(repository.isPersistent(equipe))
-        repository.delete(equipe);
     }
 
     @GET
