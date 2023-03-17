@@ -1,10 +1,17 @@
 package topicos1.unitins.dto;
 
 public class AtletaDTO {
+    @NotBlank(message = "O campo nome deve ser informado")
+    @Size(min = 3, max = 60, message = "O tamanho máximo para o campo de nome é de 60 caracteres e o mínimo é de 3")
+    @NotNull
     private String nome;
+    
     private Long idEquipe;
     private int idade;
+    
+    @NotNull
     private String cpf;
+    
     private Double altura;
     private String esporte;
     
