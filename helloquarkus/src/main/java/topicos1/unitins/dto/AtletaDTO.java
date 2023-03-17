@@ -1,5 +1,9 @@
 package topicos1.unitins.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import io.smallrye.common.constraint.NotNull;
+
 public class AtletaDTO {
     @NotBlank(message = "O campo nome deve ser informado")
     @Size(min = 3, max = 60, message = "O tamanho máximo para o campo de nome é de 60 caracteres e o mínimo é de 3")

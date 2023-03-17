@@ -7,10 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
-import io.smallrye.common.constraint.NotNull;
 
 
 @Entity
@@ -20,9 +16,6 @@ public class Atleta {
     private Long id;
 
     @Column(nullable = false, length = 80)
-    @NotBlank(message = "O campo nome deve ser informado")
-    @Size(min = 3, max = 60, message = "O tamanho máximo para o campo de nome é de 60 caracteres e o mínimo é de 3")
-    @NotNull
     private String nome;
 
     @ManyToOne
@@ -33,7 +26,6 @@ public class Atleta {
     private int idade;
 
     @Column(nullable = false, length = 14)
-    @NotNull
     private String cpf;
 
     @Column(nullable = false)
