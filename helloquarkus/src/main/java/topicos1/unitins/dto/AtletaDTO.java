@@ -6,13 +6,20 @@ public class AtletaDTO {
     @NotNull
     private String nome;
     
+    @NotBlank(message = "O campo idEquipe deve ser informado")
     private Long idEquipe;
+    
+    @NotBlank(message = "O campo idade deve ser informado")
     private int idade;
     
+    @NotBlank(message = "O campo cpf deve ser informado")
     @NotNull
     private String cpf;
     
+    @NotBlank(message = "O campo altura deve ser informado")
     private Double altura;
+
+    @NotBlank(message = "O campo esporte deve ser informado")
     private String esporte;
     
     public String getNome() {
