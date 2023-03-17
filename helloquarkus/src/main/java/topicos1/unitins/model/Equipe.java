@@ -21,7 +21,7 @@ public class Equipe {
 
     @Column(nullable = false, length = 60)
     @NotBlank(message = "O campo país deve ser informado")
-    @Size(min = 2, max = 60, message = "O tamanho máximo para o campo de nome é de 60 caracteres e o mínimo é de 2")
+    @Size(min = 2, max = 60, message = "O tamanho máximo para o campo de país é de 60 caracteres e o mínimo é de 2")
     private String pais;
 
     public Long getId() {
