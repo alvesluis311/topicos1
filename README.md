@@ -1,5 +1,3 @@
-# topicos1
-
 1) Atualizar o Quarkus para a versão 3
  - ./mvnw io.quarkus.platform:quarkus-maven-plugin:3.0.1.Final:update -N -Dstream=3.0
 2) Perfil de Usuário
