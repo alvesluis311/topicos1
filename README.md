@@ -6,18 +6,18 @@
 5) hash da senha
  - atualizar import.sql
 6) TokenJwtService
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-jwt</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-jwt-build</artifactId>
-    </dependency>
+   // <dependency>
+  //    <groupId>io.quarkus</groupId>
+   //   <artifactId>quarkus-smallrye-jwt</artifactId>
+  //  </dependency>
+  //  <dependency>
+   //   <groupId>io.quarkus</groupId>
+   //   <artifactId>quarkus-smallrye-jwt-build</artifactId>
+ //   </dependency>
 7) Configurar Properties
-	mp.jwt.verify.publickey.location=token/publickey.pem
-	mp.jwt.verify.issuer=unitins-jwt
-	smallrye.jwt.sign.key.location=token/privatekey.pem
+//	mp.jwt.verify.publickey.location=token/publickey.pem
+//	mp.jwt.verify.issuer=unitins-jwt
+//	smallrye.jwt.sign.key.location=token/privatekey.pem
 
 8) Instalar openssl
 	Download: https://slproweb.com/products/Win32OpenSSL.html
